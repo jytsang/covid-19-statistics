@@ -1,8 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { getCountryHistoric } from 'api/covidApi'
 
-function App() {
+const App = () => {
+  React.useEffect(
+    () => {
+      getCountryHistoric('CAN')
+    },
+    []
+  )
+
   return (
     <div className="App">
       <header className="App-header">
@@ -20,7 +28,7 @@ function App() {
         </a>
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
