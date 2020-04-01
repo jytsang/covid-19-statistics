@@ -2,51 +2,25 @@ import React from 'react';
 import './App.css';
 import { getGlobalHistoric } from 'api/covidApi'
 import { convertDateWise } from 'utils/convertGraphData'
-// import { Line } from '@nivo/line'
+
+import { Grid } from '@material-ui/core'
+
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from  'recharts';
 
+import { CountriesList } from 'components/CountriesList/CountriesList'
+
 const App: React.FC = () => {
-  const [globalHistoricData, setGlobalHistoricData] = React.useState<any>(null)
-
-  React.useEffect(
-    () => {
-      getGlobalHistoric()
-        .then(data => {
-          data = convertDateWise(data)
-          setGlobalHistoricData(data)
-        })
-    },
-    []
-  )
-
   return (
-    <div className="App" style={{ position: "relative", height: "500px" }}>
-      {globalHistoricData &&
-        <LineChart
-          data={globalHistoricData}
-          width={2000}
-          height={500}
-        >
-          <XAxis dataKey="name" />
-          <Line type="monotone" dataKey="confirmed" stroke="#82ca9d" />
-          <Tooltip />
-        </LineChart>
-        // <Line
-        //   data={globalHistoricData}
-        //   width={500}
-        //   height={500}
-        //   axisBottom={{
-        //     legend: 'Date'
-        //   }}
-        //   axisLeft={{
-        //     legend: 'Count'
-        //   }}
-        // />
-      }
-      {JSON.stringify(globalHistoricData)}
-    </div>
+    <Grid container className="App">
+      <Grid item md={3}>
+        <CountriesList />
+      </Grid>
+      <Grid item md={9}>
+        content
+      </Grid>
+    </Grid>
   )
 }
 
