@@ -4,11 +4,16 @@ import {
   Hidden
 } from '@material-ui/core'
 
-export const SideNav: React.FC = ({
-  children
+type SideNavProps = {
+  className?: string
+}
+
+export const SideNav: React.FC<SideNavProps> = ({
+  children,
+  className = ''
 }) => {
   return (
-    <nav>
+    <nav className={className}>
       <Hidden xsDown implementation="css">
         <Drawer
           variant="permanent"
