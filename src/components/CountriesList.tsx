@@ -1,9 +1,28 @@
 import React from 'react'
 import { getAllLatest } from 'api/covidApi'
 
-import { List, ListItem } from '@material-ui/core'
+import {
+  ListItemText,
+  makeStyles,
+  MenuList,
+  MenuItem,
+  Typography
+} from '@material-ui/core'
+
+const useStyles = makeStyles(theme => ({
+  confirmed: {
+    color: theme.palette.warning.light
+  },
+  deaths: {
+    color: theme.palette.error.light
+  },
+  recovered: {
+    color: theme.palette.success.light
+  }
+}))
 
 export const CountriesList: React.FC = props => {
+  const classes = useStyles()
   const [countriesData, setCountriesData] = React.useState<any>(null)
 
   React.useEffect(
@@ -17,17 +36,21 @@ export const CountriesList: React.FC = props => {
   )
 
   return (
-    <List>
+    <MenuList>
       {countriesData && countriesData.map((country: any) => (
-        <ListItem button key={Object.keys(country)[0]}>
-          <h2>{Object.keys(country)[0]}</h2>
-          <ul>
-            <li>C {country[Object.keys(country)[0]].confirmed}</li>
-            <li>D {country[Object.keys(country)[0]].deaths}</li>
-            <li>R {country[Object.keys(country)[0]].recovered}</li>
-          </ul>
-        </ListItem>
+        <MenuItem button key={Object.keys(country)[0]}>
+          <ListItemText
+            primary={Object.keys(country)[0]}
+            secondary={
+              <div>
+                <Typography variant="body2" component="span" className={classes.confirmed}>C {country[Object.keys(country)[0]].confirmed}</Typography>
+                <Typography variant="body2" component="span" className={classes.deaths}>D {country[Object.keys(country)[0]].deaths}</Typography>
+                <Typography variant="body2" component="span" className={classes.recovered}>R {country[Object.keys(country)[0]].recovered}</Typography>
+              </div>
+            }
+          />
+        </MenuItem>
       ))}
-    </List>
+    </MenuList>
   )
 }

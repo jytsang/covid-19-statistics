@@ -4,8 +4,9 @@ import { convertDateWise } from 'utils/convertGraphData'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import {
-  Grid,
-  makeStyles
+  makeStyles,
+  ThemeProvider,
+  createMuiTheme
 } from '@material-ui/core'
 
 import {
@@ -14,6 +15,12 @@ import {
 
 import { CountriesList } from 'components/CountriesList'
 import { SideNav } from 'components/SideNav'
+
+const theme = createMuiTheme({
+  palette: {
+    type: "dark"
+  }
+})
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,15 +43,17 @@ const App: React.FC = () => {
   const classes = useStyles()
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <SideNav className={classes.sidebar}>
-        <CountriesList />
-      </SideNav>
-      <main className={classes.content}>
-        content
-      </main>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <CssBaseline />
+        <SideNav className={classes.sidebar}>
+          <CountriesList />
+        </SideNav>
+        <main className={classes.content}>
+          content
+        </main>
+      </div>
+    </ThemeProvider>
   )
 }
 
