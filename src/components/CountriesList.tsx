@@ -1,6 +1,8 @@
 import React from 'react'
 import { getAllLatest } from 'api/covidApi'
 
+import { List, ListItem } from '@material-ui/core'
+
 export const CountriesList: React.FC = props => {
   const [countriesData, setCountriesData] = React.useState<any>(null)
 
@@ -15,17 +17,17 @@ export const CountriesList: React.FC = props => {
   )
 
   return (
-    <div>
+    <List>
       {countriesData && countriesData.map((country: any) => (
-        <div>
+        <ListItem button key={Object.keys(country)[0]}>
           <h2>{Object.keys(country)[0]}</h2>
           <ul>
-            <li>{country[Object.keys(country)[0]].confirmed}</li>
-            <li>{country[Object.keys(country)[0]].deaths}</li>
-            <li>{country[Object.keys(country)[0]].recovered}</li>
+            <li>C {country[Object.keys(country)[0]].confirmed}</li>
+            <li>D {country[Object.keys(country)[0]].deaths}</li>
+            <li>R {country[Object.keys(country)[0]].recovered}</li>
           </ul>
-        </div>
+        </ListItem>
       ))}
-    </div>
+    </List>
   )
 }
