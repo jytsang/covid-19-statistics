@@ -43,9 +43,15 @@ export const CountriesList: React.FC = props => {
             primary={Object.keys(country)[0]}
             secondary={
               <div>
-                <Typography variant="body2" component="span" className={classes.confirmed}>C {country[Object.keys(country)[0]].confirmed}</Typography>
-                <Typography variant="body2" component="span" className={classes.deaths}>D {country[Object.keys(country)[0]].deaths}</Typography>
-                <Typography variant="body2" component="span" className={classes.recovered}>R {country[Object.keys(country)[0]].recovered}</Typography>
+                <Typography variant="body2" component="span" className={classes.confirmed}>
+                  co. {country[Object.keys(country)[0]].confirmed}
+                </Typography>
+                <Typography variant="body2" component="span" className={classes.deaths}>
+                  de. {country[Object.keys(country)[0]].deaths}
+                </Typography>
+                <Typography variant="body2" component="span" className={classes.recovered}>
+                  re. {country[Object.keys(country)[0]].recovered}
+                </Typography>
               </div>
             }
           />
