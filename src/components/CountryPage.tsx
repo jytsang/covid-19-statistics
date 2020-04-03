@@ -1,0 +1,68 @@
+import React from 'react'
+import { useParams } from 'react-router-dom'
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
+} from 'recharts'
+import {
+  Typography,
+  useTheme
+} from '@material-ui/core'
+
+import { getCountryHistoric } from 'api/covidApi'
+import { convertDateWise } from 'utils/convertGraphData'
+
+export const CountryPage: React.FC = props => {
+  const { countryCode } = useParams<{countryCode: string}>()
+  const [countryData, setCountryData] = React.useState(null)
+  const theme = useTheme()
+
+  React.useEffect(
+    () => {
+      getCountryHistoric(countryCode)
+        .then(data => {
+          setCountryData(data)
+        })
+    },
+    [countryCode]
+  )
+
+  return (
+    <div>
+      <Typography variant="h2">{countryCode}</Typography>
+      {countryData &&
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={convertDateWise(countryData)}>
+            <CartesianGrid strokeDasharray="3 3" stroke={theme.palette.grey[600]} />
+            <XAxis dataKey="date" stroke={theme.palette.grey[200]} />
+            <YAxis stroke={theme.palette.grey[200]} />
+            <Tooltip />
+            <Legend />
+            <Line
+              dataKey="confirmed"
+              stroke={theme.palette.warning.main}
+              strokeWidth={3}
+              dot={{ strokeWidth: 0 }}
+            />
+            <Line
+              dataKey="deaths"
+              stroke={theme.palette.error.main}
+              strokeWidth={3}
+            />
+            <Line
+              dataKey="recovered"
+              stroke={theme.palette.success.main}
+              strokeWidth={3}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      }
+    </div>
+  )
+}

@@ -1,20 +1,17 @@
-import React from 'react';
-import { getGlobalHistoric } from 'api/covidApi'
-import { convertDateWise } from 'utils/convertGraphData'
+import React from 'react'
+import { BrowserRouter, Route } from 'react-router-dom'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import {
+  createMuiTheme,
   makeStyles,
   ThemeProvider,
-  createMuiTheme
+  Typography
 } from '@material-ui/core'
-
-import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-} from  'recharts';
 
 import { CountriesList } from 'components/CountriesList'
 import { SideNav } from 'components/SideNav'
+import { CountryPage } from 'components/CountryPage'
 
 const theme = createMuiTheme({
   palette: {
@@ -43,17 +40,24 @@ const App: React.FC = () => {
   const classes = useStyles()
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <CssBaseline />
-        <SideNav className={classes.sidebar}>
-          <CountriesList />
-        </SideNav>
-        <main className={classes.content}>
-          content
-        </main>
-      </div>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <CssBaseline />
+          <SideNav className={classes.sidebar}>
+            <CountriesList />
+          </SideNav>
+          <main className={classes.content}>
+            <header>
+              <Typography variant="h1">COVID-19 Statistics</Typography>
+            </header>
+            <Route path="/:countryCode">
+              <CountryPage />
+            </Route>
+          </main>
+        </div>
+      </ThemeProvider>
+    </BrowserRouter>
   )
 }
 

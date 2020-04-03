@@ -1,5 +1,6 @@
 import React from 'react'
 import { getAllLatest } from 'api/covidApi'
+import { Link } from 'react-router-dom'
 
 import {
   ListItemText,
@@ -29,6 +30,10 @@ const useStyles = makeStyles(theme => ({
     borderStyle: 'solid',
     borderColor: theme.palette.grey[500],
     borderTopWidth: 1
+  },
+  link: {
+    color: theme.palette.text.primary,
+    textDecoration: 'none'
   }
 }))
 
@@ -49,24 +54,26 @@ export const CountriesList: React.FC = props => {
   return (
     <MenuList>
       {countriesData && countriesData.map((country: any) => (
-        <MenuItem button key={Object.keys(country)[0]} className={classes.menuItem}>
-          <ListItemText
-            primary={Object.keys(country)[0]}
-            secondary={
-              <div className={classes.stats}>
-                <Typography variant="body2" component="span" className={classes.confirmed}>
-                  co. {country[Object.keys(country)[0]].confirmed}
-                </Typography>
-                <Typography variant="body2" component="span" className={classes.deaths}>
-                  de. {country[Object.keys(country)[0]].deaths}
-                </Typography>
-                <Typography variant="body2" component="span" className={classes.recovered}>
-                  re. {country[Object.keys(country)[0]].recovered}
-                </Typography>
-              </div>
-            }
-          />
-        </MenuItem>
+        <Link to={`/${Object.keys(country)[0]}`} key={Object.keys(country)[0]} className={classes.link}>
+          <MenuItem button className={classes.menuItem}>
+              <ListItemText
+                primary={Object.keys(country)[0]}
+                secondary={
+                  <span className={classes.stats}>
+                    <Typography variant="body2" component="span" className={classes.confirmed}>
+                      co. {country[Object.keys(country)[0]].confirmed}
+                    </Typography>
+                    <Typography variant="body2" component="span" className={classes.deaths}>
+                      de. {country[Object.keys(country)[0]].deaths}
+                    </Typography>
+                    <Typography variant="body2" component="span" className={classes.recovered}>
+                      re. {country[Object.keys(country)[0]].recovered}
+                    </Typography>
+                  </span>
+                }
+              />
+          </MenuItem>
+        </Link>
       ))}
     </MenuList>
   )

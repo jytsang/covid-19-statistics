@@ -18,11 +18,10 @@ export const getGlobalHistoric = async() => {
   return response.data.result
 }
 
-export const getCountryHistoric = (countryId: string) => {
-  axios.get(
+export const getCountryHistoric = async(countryId: string) => {
+  const response = await axios.get(
     `${apiUrl}/country/${countryId}`
   )
-  .then(response => {
-    console.log(response)
-  })
+  
+  return response.data.result
 }
