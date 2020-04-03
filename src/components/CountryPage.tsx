@@ -40,7 +40,10 @@ export const CountryPage: React.FC = props => {
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={convertDateWise(countryData)}>
             <CartesianGrid strokeDasharray="3 3" stroke={theme.palette.grey[600]} />
-            <XAxis dataKey="date" stroke={theme.palette.grey[200]} />
+            <XAxis
+              dataKey="date"
+              stroke={theme.palette.grey[200]} 
+            />
             <YAxis stroke={theme.palette.grey[200]} />
             <Tooltip />
             <Legend />
@@ -48,17 +51,19 @@ export const CountryPage: React.FC = props => {
               dataKey="confirmed"
               stroke={theme.palette.warning.main}
               strokeWidth={3}
-              dot={{ strokeWidth: 0 }}
+              dot={{ stroke: theme.palette.warning.light, strokeWidth: 1, fill: theme.palette.warning.dark }}
             />
             <Line
               dataKey="deaths"
               stroke={theme.palette.error.main}
               strokeWidth={3}
+              dot={{ stroke: theme.palette.error.light, strokeWidth: 1, fill: theme.palette.error.dark }}
             />
             <Line
               dataKey="recovered"
               stroke={theme.palette.success.main}
               strokeWidth={3}
+              dot={{ stroke: theme.palette.success.light, strokeWidth: 1, fill: theme.palette.success.dark }}
             />
           </LineChart>
         </ResponsiveContainer>

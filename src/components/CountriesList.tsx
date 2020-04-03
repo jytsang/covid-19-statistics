@@ -11,6 +11,18 @@ import {
 } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
+  header: {
+    display: 'flex',
+    zIndex: 2,
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+    padding: '6px 16px',
+    backgroundColor: theme.palette.background.paper,
+    '& > span': {
+      width: '33.33%'
+    }
+  },
   confirmed: {
     color: theme.palette.warning.light
   },
@@ -52,29 +64,43 @@ export const CountriesList: React.FC = props => {
   )
 
   return (
-    <MenuList>
-      {countriesData && countriesData.map((country: any) => (
-        <Link to={`/${Object.keys(country)[0]}`} key={Object.keys(country)[0]} className={classes.link}>
-          <MenuItem button className={classes.menuItem}>
-              <ListItemText
-                primary={Object.keys(country)[0]}
-                secondary={
-                  <span className={classes.stats}>
-                    <Typography variant="body2" component="span" className={classes.confirmed}>
-                      co. {country[Object.keys(country)[0]].confirmed}
-                    </Typography>
-                    <Typography variant="body2" component="span" className={classes.deaths}>
-                      de. {country[Object.keys(country)[0]].deaths}
-                    </Typography>
-                    <Typography variant="body2" component="span" className={classes.recovered}>
-                      re. {country[Object.keys(country)[0]].recovered}
-                    </Typography>
-                  </span>
-                }
-              />
-          </MenuItem>
-        </Link>
-      ))}
-    </MenuList>
+    <>
+
+<div className={classes.header}>
+        <Typography variant="body2" component="span" className={classes.confirmed}>
+          confirmed
+        </Typography>
+        <Typography variant="body2" component="span" className={classes.deaths}>
+          deaths
+        </Typography>
+        <Typography variant="body2" component="span" className={classes.recovered}>
+          recovered
+        </Typography>
+      </div>
+      <MenuList>
+        {countriesData && countriesData.map((country: any) => (
+          <Link to={`/${Object.keys(country)[0]}`} key={Object.keys(country)[0]} className={classes.link}>
+            <MenuItem button className={classes.menuItem}>
+                <ListItemText
+                  primary={Object.keys(country)[0]}
+                  secondary={
+                    <span className={classes.stats}>
+                      <Typography variant="body2" component="span" className={classes.confirmed}>
+                        {country[Object.keys(country)[0]].confirmed}
+                      </Typography>
+                      <Typography variant="body2" component="span" className={classes.deaths}>
+                        {country[Object.keys(country)[0]].deaths}
+                      </Typography>
+                      <Typography variant="body2" component="span" className={classes.recovered}>
+                        {country[Object.keys(country)[0]].recovered}
+                      </Typography>
+                    </span>
+                  }
+                />
+            </MenuItem>
+          </Link>
+        ))}
+      </MenuList>
+    </>
   )
 }
