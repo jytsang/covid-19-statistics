@@ -18,6 +18,17 @@ const useStyles = makeStyles(theme => ({
   },
   recovered: {
     color: theme.palette.success.light
+  },
+  stats: {
+    display: 'flex',
+    '& > span': {
+      width: '33.33%'
+    }
+  },
+  menuItem: {
+    borderStyle: 'solid',
+    borderColor: theme.palette.grey[500],
+    borderTopWidth: 1
   }
 }))
 
@@ -38,11 +49,11 @@ export const CountriesList: React.FC = props => {
   return (
     <MenuList>
       {countriesData && countriesData.map((country: any) => (
-        <MenuItem button key={Object.keys(country)[0]}>
+        <MenuItem button key={Object.keys(country)[0]} className={classes.menuItem}>
           <ListItemText
             primary={Object.keys(country)[0]}
             secondary={
-              <div>
+              <div className={classes.stats}>
                 <Typography variant="body2" component="span" className={classes.confirmed}>
                   co. {country[Object.keys(country)[0]].confirmed}
                 </Typography>
