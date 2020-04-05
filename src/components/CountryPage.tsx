@@ -14,6 +14,7 @@ import {
   Typography,
   useTheme
 } from '@material-ui/core'
+import { useTranslation } from 'react-i18next'
 
 import { getCountryHistoric } from 'api/covidApi'
 import { convertDateWise } from 'utils/convertGraphData'
@@ -22,6 +23,7 @@ export const CountryPage: React.FC = props => {
   const { countryCode } = useParams<{countryCode: string}>()
   const [countryData, setCountryData] = React.useState(null)
   const theme = useTheme()
+  const { t } = useTranslation('countries')
 
   React.useEffect(
     () => {
@@ -35,7 +37,7 @@ export const CountryPage: React.FC = props => {
 
   return (
     <div>
-      <Typography variant="h2">{countryCode}</Typography>
+      <Typography variant="h2">{t(countryCode)}</Typography>
       {countryData &&
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={convertDateWise(countryData)}>

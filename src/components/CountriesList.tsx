@@ -1,6 +1,7 @@
 import React from 'react'
 import { getAllLatest } from 'api/covidApi'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 import {
   ListItemText,
@@ -52,6 +53,7 @@ const useStyles = makeStyles(theme => ({
 export const CountriesList: React.FC = props => {
   const classes = useStyles()
   const [countriesData, setCountriesData] = React.useState<any>(null)
+  const { t } = useTranslation('countries')
 
   React.useEffect(
     () => {
@@ -64,9 +66,8 @@ export const CountriesList: React.FC = props => {
   )
 
   return (
-    <>
-
-<div className={classes.header}>
+    <React.Suspense fallback="loading">
+      <div className={classes.header}>
         <Typography variant="body2" component="span" className={classes.confirmed}>
           confirmed
         </Typography>
@@ -82,7 +83,7 @@ export const CountriesList: React.FC = props => {
           <Link to={`/${Object.keys(country)[0]}`} key={Object.keys(country)[0]} className={classes.link}>
             <MenuItem button className={classes.menuItem}>
                 <ListItemText
-                  primary={Object.keys(country)[0]}
+                  primary={t(Object.keys(country)[0])}
                   secondary={
                     <span className={classes.stats}>
                       <Typography variant="body2" component="span" className={classes.confirmed}>
@@ -101,6 +102,6 @@ export const CountriesList: React.FC = props => {
           </Link>
         ))}
       </MenuList>
-    </>
+    </React.Suspense>
   )
 }

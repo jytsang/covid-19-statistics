@@ -1,4 +1,4 @@
-{
+export default {
   "AFG": "Afghanistan",
   "AGO": "Angola",
   "ALB": "Albania",
@@ -47,7 +47,7 @@
   "DMA": "Dominica",
   "DNK": "Denmark",
   "DOM": "Dominican Republic",
-  "DPS": "",
+  "DPS": "DPS",
   "DZA": "Algeria",
   "ECU": "Ecuador",
   "EGY": "Egypt",
@@ -116,7 +116,7 @@
   "MNG": "Mongolia",
   "MOZ": "Mozambique",
   "MRT": "Mauritania",
-  "MSZ": "",
+  "MSZ": "MSZ",
   "MUS": "Mauritius",
   "MWI": "Malawi",
   "MYS": "Malaysia",
