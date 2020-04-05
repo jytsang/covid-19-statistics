@@ -3,8 +3,6 @@ import { initReactI18next } from 'react-i18next'
 
 import countriesEN from 'locales/en/countries'
 
-console.log(countriesEN)
-
 const resources = {
   en: {
     countries: countriesEN
