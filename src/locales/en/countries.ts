@@ -90,7 +90,7 @@ export default {
   "KGZ": "Kyrgyzstan",
   "KHM": "Cambodia",
   "KNA": "Saint Kitts and Nevis",
-  "KOR": "Korea",
+  "KOR": "South Korea",
   "KWT": "Kuwait",
   "LAO": "Lao People's Democratic Republic",
   "LBN": "Lebanon",
