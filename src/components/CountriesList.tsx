@@ -12,18 +12,6 @@ import {
 } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
-  header: {
-    display: 'flex',
-    zIndex: 2,
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    padding: '6px 16px',
-    backgroundColor: theme.palette.background.paper,
-    '& > span': {
-      width: '33.33%'
-    }
-  },
   confirmed: {
     color: theme.palette.warning.light
   },
@@ -39,14 +27,14 @@ const useStyles = makeStyles(theme => ({
       width: '33.33%'
     }
   },
-  menuItem: {
-    borderStyle: 'solid',
-    borderColor: theme.palette.grey[500],
-    borderTopWidth: 1
-  },
   link: {
+    display: 'block',
+    borderTop: `1px solid ${theme.palette.grey[500]}`,
     color: theme.palette.text.primary,
-    textDecoration: 'none'
+    textDecoration: 'none',
+    '&:first-child': {
+      borderTop: 'none'
+    }
   }
 }))
 
@@ -66,22 +54,11 @@ export const CountriesList: React.FC = props => {
   )
 
   return (
-    <React.Suspense fallback="loading">
-      <div className={classes.header}>
-        <Typography variant="body2" component="span" className={classes.confirmed}>
-          confirmed
-        </Typography>
-        <Typography variant="body2" component="span" className={classes.deaths}>
-          deaths
-        </Typography>
-        <Typography variant="body2" component="span" className={classes.recovered}>
-          recovered
-        </Typography>
-      </div>
+    <>
       <MenuList>
         {countriesData && countriesData.map((country: any) => (
           <Link to={`/${Object.keys(country)[0]}`} key={Object.keys(country)[0]} className={classes.link}>
-            <MenuItem button className={classes.menuItem}>
+            <MenuItem button>
                 <ListItemText
                   primary={t(Object.keys(country)[0])}
                   secondary={
@@ -102,6 +79,6 @@ export const CountriesList: React.FC = props => {
           </Link>
         ))}
       </MenuList>
-    </React.Suspense>
+    </>
   )
 }

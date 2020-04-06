@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
   sidebar: {
     [theme.breakpoints.up('sm')]: {
+      position: 'relative',
       width: 300,
       flexShrink: 0,
       flexGrow: 0,
