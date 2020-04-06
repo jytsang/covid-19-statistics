@@ -47,6 +47,9 @@ export const CountriesList: React.FC = props => {
     () => {
       getAllLatest()
         .then(data => {
+          data.sort((a: any, b: any) => {
+            return a[Object.keys(a)[0]].confirmed < b[Object.keys(b)[0]].confirmed ? 1 : -1
+          })
           setCountriesData(data)
         })
     },

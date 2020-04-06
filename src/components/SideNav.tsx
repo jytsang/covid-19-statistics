@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     top: 0,
     width: '100%',
-    padding: '6px 16px',
+    padding: '6px 30px 6px 16px',
     borderBottom: `1px solid ${theme.palette.grey[500]}`,
     backgroundColor: theme.palette.background.paper,
     '& > span': {
