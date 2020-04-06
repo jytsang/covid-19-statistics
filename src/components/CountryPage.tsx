@@ -37,7 +37,7 @@ export const CountryPage: React.FC = props => {
 
   return (
     <div>
-      <Typography variant="h2">{t(countryCode)}</Typography>
+      <Typography variant="h4" component="h2">{t(countryCode)}</Typography>
       {countryData &&
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={convertDateWise(countryData)}>
@@ -47,7 +47,7 @@ export const CountryPage: React.FC = props => {
               stroke={theme.palette.grey[200]} 
             />
             <YAxis stroke={theme.palette.grey[200]} />
-            <Tooltip />
+            <Tooltip contentStyle={{ backgroundColor: theme.palette.grey[900] }} />
             <Legend />
             <Line
               dataKey="confirmed"

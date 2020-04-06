@@ -33,6 +33,10 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+  },
+  title: {
+    marginBottom: theme.spacing(3),
+    borderBottom: `1px solid ${theme.palette.grey[300]}`
   }
 }))
 
@@ -49,7 +53,7 @@ const App: React.FC = () => {
           </SideNav>
           <main className={classes.content}>
             <header>
-              <Typography variant="h1">COVID-19 Statistics</Typography>
+              <Typography variant="h2" component="h1" className={classes.title}>COVID-19 Statistics</Typography>
             </header>
             <Route path="/:countryCode">
               <CountryPage />
