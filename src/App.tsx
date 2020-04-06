@@ -12,6 +12,7 @@ import {
 import { CountriesList } from 'components/CountriesList'
 import { SideNav } from 'components/SideNav'
 import { CountryPage } from 'components/CountryPage'
+import { Footer } from 'components/Footer'
 
 const theme = createMuiTheme({
   palette: {
@@ -53,12 +54,15 @@ const App: React.FC = () => {
             <CountriesList />
           </SideNav>
           <main className={classes.content}>
-            <header>
-              <Typography variant="h2" component="h1" className={classes.title}>COVID-19 Statistics</Typography>
-            </header>
-            <Route path="/:countryCode">
-              <CountryPage />
-            </Route>
+            <div>
+              <header>
+                <Typography variant="h2" component="h1" className={classes.title}>COVID-19 Statistics</Typography>
+              </header>
+              <Route path="/:countryCode">
+                <CountryPage />
+              </Route>
+            </div>
+            <Footer />
           </main>
         </div>
       </ThemeProvider>
