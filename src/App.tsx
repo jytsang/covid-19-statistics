@@ -56,7 +56,7 @@ const App: React.FC = () => {
           <main className={classes.content}>
             <div>
               <header>
-                <Typography variant="h2" component="h1" className={classes.title}>COVID-19 Statistics</Typography>
+                <Typography variant="h5" component="h1" className={classes.title}>COVID-19 Statistics</Typography>
               </header>
               <Route path="/:countryCode">
                 <CountryPage />

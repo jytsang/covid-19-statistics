@@ -32,13 +32,22 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     padding: theme.spacing(3),
     backgroundColor: theme.palette.grey[900]
-  }
+  },
+  confirmed: {
+    color: theme.palette.warning.light
+  },
+  deaths: {
+    color: theme.palette.error.light
+  },
+  recovered: {
+    color: theme.palette.success.light
+  },
 }))
 
 export const CountryPage: React.FC = props => {
   const { countryCode } = useParams<{countryCode: string}>()
   const [countryData, setCountryData] = React.useState<ReturnType<typeof convertDateWise>>(
-    [{date: '2020-01-22', confirmed: 0, deaths:0, recovered: 0}]
+    [{date: '', confirmed: null, deaths: null, recovered: null}]
   )
   const theme = useTheme()
   const classes = useStyles()
@@ -54,6 +63,28 @@ export const CountryPage: React.FC = props => {
     [countryCode]
   )
 
+  const getHighestIncrease = React.useCallback(
+    (type: 'confirmed' | 'deaths' | 'recovered') => {
+      if (countryData.length < 2) return 'N/A'
+
+      let highest = 0
+      let highestDate = ''
+
+      countryData.map((data, index) => {
+        if (
+          index > 0
+          && Math.abs(data[type] - countryData[index - 1][type]) > highest
+        ) {
+          highest = Math.abs(data[type] - countryData[index - 1][type])
+          highestDate = data.date
+        }
+      })
+      
+      return `+${highest} (${highestDate})`
+    },
+    [countryData]
+  )
+
   return (
     <div>
       <Typography variant="h4" component="h2" className={classes.title}>{t(countryCode)}</Typography>
@@ -61,24 +92,36 @@ export const CountryPage: React.FC = props => {
         <Grid container spacing={3}>
           <Grid item md={3}>
             <div className={classes.box}>
-              <Typography variant="h6" component="h3">Latest</Typography>
+              <Typography variant="h6" component="h3">Latest {`(${countryData[countryData.length - 1].date})`}</Typography>
               <List>
                 <ListItem>
                   <ListItemText
-                    primary={`Confirmed: ${countryData[countryData.length - 1].confirmed}`}
-                    secondary="Highest increase:"
+                    primary={
+                      <>
+                        Confirmed: <Typography component="span" className={classes.confirmed}>{countryData[countryData.length - 1].confirmed}</Typography>
+                      </>
+                    }
+                    secondary={`Highest increase: ${getHighestIncrease('confirmed')}`}
                   />
                 </ListItem>
                 <ListItem>
                   <ListItemText
-                    primary={`Deaths: ${countryData[countryData.length - 1].deaths}`}
-                    secondary="Highest increase:"
+                    primary={
+                      <>
+                        Deaths: <Typography component="span" className={classes.deaths}>{countryData[countryData.length - 1].deaths}</Typography>
+                      </>
+                    }
+                    secondary={`Highest increase: ${getHighestIncrease('deaths')}`}
                   />
                 </ListItem>
                 <ListItem>
                   <ListItemText
-                    primary={`Recovered: ${countryData[countryData.length - 1].recovered}`}
-                    secondary="Highest increase:"
+                    primary={
+                      <>
+                        Recovered: <Typography component="span" className={classes.recovered}>{countryData[countryData.length - 1].recovered}</Typography>
+                      </>
+                    }
+                    secondary={`Highest increase: ${getHighestIncrease('recovered')}`}
                   />
                 </ListItem>
               </List>
