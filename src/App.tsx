@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import {
@@ -11,7 +11,8 @@ import {
 
 import { CountriesList } from 'components/CountriesList'
 import { SideNav } from 'components/SideNav'
-import { CountryPage } from 'components/CountryPage'
+import { CountryPage } from 'pages/CountryPage'
+import { GlobalPage } from 'pages/GlobalPage'
 import { Footer } from 'components/Footer'
 
 const theme = createMuiTheme({
@@ -58,9 +59,14 @@ const App: React.FC = () => {
               <header>
                 <Typography variant="h5" component="h1" className={classes.title}>COVID-19 Statistics</Typography>
               </header>
-              <Route path="/:countryCode">
-                <CountryPage />
-              </Route>
+              <Switch>
+                <Route path="/:countryCode">
+                  <CountryPage />
+                </Route>
+                <Route path="/">
+                  <GlobalPage />
+                </Route>
+              </Switch>
             </div>
             <Footer />
           </main>

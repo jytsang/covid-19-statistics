@@ -103,22 +103,22 @@ export const SideNav: React.FC<SideNavProps> = ({
           {globalData &&
             <Link to="/" className={classes.link}>
               <MenuItem button>
-                  <ListItemText
-                    primary="Global"
-                    secondary={
-                      <span className={classes.stats}>
-                        <Typography variant="body2" component="span" className={classes.confirmed}>
-                          {globalData.confirmed}
-                        </Typography>
-                        <Typography variant="body2" component="span" className={classes.deaths}>
-                          {globalData.deaths}
-                        </Typography>
-                        <Typography variant="body2" component="span" className={classes.recovered}>
-                          {globalData.recovered}
-                        </Typography>
-                      </span>
-                    }
-                  />
+                <ListItemText
+                  primary="Global"
+                  secondary={
+                    <span className={classes.stats}>
+                      <Typography variant="body2" component="span" className={classes.confirmed}>
+                        {globalData.confirmed}
+                      </Typography>
+                      <Typography variant="body2" component="span" className={classes.deaths}>
+                        {globalData.deaths}
+                      </Typography>
+                      <Typography variant="body2" component="span" className={classes.recovered}>
+                        {globalData.recovered}
+                      </Typography>
+                    </span>
+                  }
+                />
               </MenuItem>
             </Link>
           }

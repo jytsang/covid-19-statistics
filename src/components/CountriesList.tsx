@@ -62,22 +62,22 @@ export const CountriesList: React.FC = props => {
         {countriesData && countriesData.map((country: any) => (
           <Link to={`/${Object.keys(country)[0]}`} key={Object.keys(country)[0]} className={classes.link}>
             <MenuItem button>
-                <ListItemText
-                  primary={t(Object.keys(country)[0])}
-                  secondary={
-                    <span className={classes.stats}>
-                      <Typography variant="body2" component="span" className={classes.confirmed}>
-                        {country[Object.keys(country)[0]].confirmed}
-                      </Typography>
-                      <Typography variant="body2" component="span" className={classes.deaths}>
-                        {country[Object.keys(country)[0]].deaths}
-                      </Typography>
-                      <Typography variant="body2" component="span" className={classes.recovered}>
-                        {country[Object.keys(country)[0]].recovered}
-                      </Typography>
-                    </span>
-                  }
-                />
+              <ListItemText
+                primary={t(Object.keys(country)[0])}
+                secondary={
+                  <span className={classes.stats}>
+                    <Typography variant="body2" component="span" className={classes.confirmed}>
+                      {country[Object.keys(country)[0]].confirmed}
+                    </Typography>
+                    <Typography variant="body2" component="span" className={classes.deaths}>
+                      {country[Object.keys(country)[0]].deaths}
+                    </Typography>
+                    <Typography variant="body2" component="span" className={classes.recovered}>
+                      {country[Object.keys(country)[0]].recovered}
+                    </Typography>
+                  </span>
+                }
+              />
             </MenuItem>
           </Link>
         ))}
