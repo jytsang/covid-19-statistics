@@ -11,9 +11,6 @@ import {
 } from 'recharts'
 import {
   Grid,
-  List,
-  ListItem,
-  ListItemText,
   makeStyles,
   Typography,
   useTheme
@@ -22,7 +19,8 @@ import { useTranslation } from 'react-i18next'
 
 import { getGlobalHistoric } from 'api/covidApi'
 import { convertDateWise } from 'utils/convertGraphData'
-import { getHighestIncrease } from 'utils/calculateStats'
+
+import { Latest } from 'components/Latest'
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -68,41 +66,7 @@ export const GlobalPage: React.FC = props => {
       {globalData &&
         <Grid container spacing={3}>
           <Grid item md={3}>
-            <div className={classes.box}>
-              <Typography variant="h6" component="h3">Latest {`(${globalData[globalData.length - 1].date})`}</Typography>
-              <List>
-                <ListItem>
-                  <ListItemText
-                    primary={
-                      <>
-                        Confirmed: <Typography component="span" className={classes.confirmed}>{globalData[globalData.length - 1].confirmed}</Typography>
-                      </>
-                    }
-                    secondary={`Highest increase: ${getHighestIncrease('confirmed', globalData)}`}
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemText
-                    primary={
-                      <>
-                        Deaths: <Typography component="span" className={classes.deaths}>{globalData[globalData.length - 1].deaths}</Typography>
-                      </>
-                    }
-                    secondary={`Highest increase: ${getHighestIncrease('deaths', globalData)}`}
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemText
-                    primary={
-                      <>
-                        Recovered: <Typography component="span" className={classes.recovered}>{globalData[globalData.length - 1].recovered}</Typography>
-                      </>
-                    }
-                    secondary={`Highest increase: ${getHighestIncrease('recovered', globalData)}`}
-                  />
-                </ListItem>
-              </List>
-            </div>
+            <Latest data={globalData} />
           </Grid>
           <Grid item md={9}>
             <div className={classes.box}>
