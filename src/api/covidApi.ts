@@ -2,6 +2,14 @@ import axios from 'axios'
 
 const apiUrl = 'https://covidapi.info/api/v1'
 
+export const getGlobalLatest = async() => {
+  const response = await axios.get(
+    `${apiUrl}/global`
+  )
+
+  return response.data.result
+}
+
 export const getAllLatest = async() => {
   const response = await axios.get(
     `${apiUrl}/global/latest`

@@ -1,10 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import {
   Drawer,
   Hidden,
   makeStyles,
+  ListItemText,
+  MenuItem,
   Typography
 } from '@material-ui/core'
+
+import { getGlobalLatest } from 'api/covidApi'
 
 const useStyles = makeStyles(theme => ({
   confirmed: {
@@ -36,6 +41,21 @@ const useStyles = makeStyles(theme => ({
       width: '33.33%'
     }
   },
+  stats: {
+    display: 'flex',
+    '& > span': {
+      width: '33.33%'
+    }
+  },
+  link: {
+    display: 'block',
+    borderTop: `1px solid ${theme.palette.grey[500]}`,
+    color: theme.palette.text.primary,
+    textDecoration: 'none',
+    '&:first-child': {
+      borderTop: 'none'
+    }
+  }
 }))
 
 type SideNavProps = {
@@ -47,6 +67,17 @@ export const SideNav: React.FC<SideNavProps> = ({
   className = ''
 }) => {
   const classes = useStyles()
+  const [globalData, setGlobalData] = React.useState<any>(null)
+
+  React.useEffect(
+    () => {
+      getGlobalLatest()
+        .then(data => {
+          setGlobalData(data)
+        })
+    },
+    []
+  )
 
   return (
     <nav className={className}>
@@ -69,6 +100,28 @@ export const SideNav: React.FC<SideNavProps> = ({
           variant="permanent"
           open
         >
+          {globalData &&
+            <Link to="/" className={classes.link}>
+              <MenuItem button>
+                  <ListItemText
+                    primary="Global"
+                    secondary={
+                      <span className={classes.stats}>
+                        <Typography variant="body2" component="span" className={classes.confirmed}>
+                          {globalData.confirmed}
+                        </Typography>
+                        <Typography variant="body2" component="span" className={classes.deaths}>
+                          {globalData.deaths}
+                        </Typography>
+                        <Typography variant="body2" component="span" className={classes.recovered}>
+                          {globalData.recovered}
+                        </Typography>
+                      </span>
+                    }
+                  />
+              </MenuItem>
+            </Link>
+          }
           {children}
         </Drawer>
       </Hidden>

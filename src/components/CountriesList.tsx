@@ -31,10 +31,10 @@ const useStyles = makeStyles(theme => ({
     display: 'block',
     borderTop: `1px solid ${theme.palette.grey[500]}`,
     color: theme.palette.text.primary,
-    textDecoration: 'none',
-    '&:first-child': {
-      borderTop: 'none'
-    }
+    textDecoration: 'none'
+  },
+  list: {
+    paddingTop: 0,
   }
 }))
 
@@ -58,7 +58,7 @@ export const CountriesList: React.FC = props => {
 
   return (
     <>
-      <MenuList>
+      <MenuList className={classes.list}>
         {countriesData && countriesData.map((country: any) => (
           <Link to={`/${Object.keys(country)[0]}`} key={Object.keys(country)[0]} className={classes.link}>
             <MenuItem button>
