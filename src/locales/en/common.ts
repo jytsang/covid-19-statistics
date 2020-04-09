@@ -1,3 +1,4 @@
 export default {
-  "Global": "Global"
+  "global": "Global",
+  "latest": "Latest"
 }

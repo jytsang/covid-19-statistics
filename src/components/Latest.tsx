@@ -36,10 +36,11 @@ export const Latest: React.FC<LatestProps> = ({
   data
 }) => {
   const classes = useStyles()
+  const { t } = useTranslation('common')
 
   return (
     <div className={classes.box}>
-      <Typography variant="h6" component="h3">Latest {`(${data[data.length - 1].date})`}</Typography>
+      <Typography variant="h6" component="h3">{t('latest')} {`(${data[data.length - 1].date})`}</Typography>
       <List>
         <ListItem>
           <ListItemText

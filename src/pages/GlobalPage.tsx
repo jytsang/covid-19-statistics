@@ -37,13 +37,13 @@ export const GlobalPage: React.FC = props => {
 
   return (
     <div>
-      <Typography variant="h4" component="h2" className={classes.title}>{t('Global')}</Typography>
+      <Typography variant="h4" component="h2" className={classes.title}>{t('global')}</Typography>
       {globalData &&
         <Grid container spacing={3}>
-          <Grid item md={3}>
+          <Grid item xs={12} md={3}>
             <Latest data={globalData} />
           </Grid>
-          <Grid item md={9}>
+          <Grid item xs={12} md={9}>
             <HistoricLineGraph data={globalData} />
           </Grid>
         </Grid>

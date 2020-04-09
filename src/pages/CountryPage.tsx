@@ -42,10 +42,10 @@ export const CountryPage: React.FC = props => {
       <Typography variant="h4" component="h2" className={classes.title}>{t(countryCode)}</Typography>
       {countryData &&
         <Grid container spacing={3}>
-          <Grid item md={3}>
+          <Grid item xs={12} md={3}>
             <Latest data={countryData} />
           </Grid>
-          <Grid item md={9}>
+          <Grid item xs={12} md={9}>
             <HistoricLineGraph data={countryData} />
           </Grid>
         </Grid>
