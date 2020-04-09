@@ -60,11 +60,15 @@ const useStyles = makeStyles(theme => ({
 
 type SideNavProps = {
   className?: string
+  drawerOpen: boolean
+  handleToggleDrawer: React.Dispatch<boolean>
 }
 
 export const SideNav: React.FC<SideNavProps> = ({
   children,
-  className = ''
+  className = '',
+  drawerOpen,
+  handleToggleDrawer
 }) => {
   const classes = useStyles()
   const [globalData, setGlobalData] = React.useState<any>(null)
@@ -79,20 +83,66 @@ export const SideNav: React.FC<SideNavProps> = ({
     []
   )
 
+  const header = (
+    <div className={classes.header}>
+      <Typography variant="body2" component="span" className={classes.confirmed}>
+        confirmed
+      </Typography>
+      <Typography variant="body2" component="span" className={classes.deaths}>
+        deaths
+      </Typography>
+      <Typography variant="body2" component="span" className={classes.recovered}>
+        recovered
+      </Typography>
+    </div>
+  )
+
+  const globalItem = (
+    <>
+      {globalData &&
+        <Link to="/" className={classes.link}>
+          <MenuItem button>
+            <ListItemText
+              primary="Global"
+              secondary={
+                <span className={classes.stats}>
+                  <Typography variant="body2" component="span" className={classes.confirmed}>
+                    {globalData.confirmed}
+                  </Typography>
+                  <Typography variant="body2" component="span" className={classes.deaths}>
+                    {globalData.deaths}
+                  </Typography>
+                  <Typography variant="body2" component="span" className={classes.recovered}>
+                    {globalData.recovered}
+                  </Typography>
+                </span>
+              }
+            />
+          </MenuItem>
+        </Link>
+      }
+    </>
+    
+  )
+
   return (
     <nav className={className}>
-      <Hidden xsDown implementation="css">
-        <div className={classes.header}>
-          <Typography variant="body2" component="span" className={classes.confirmed}>
-            confirmed
-          </Typography>
-          <Typography variant="body2" component="span" className={classes.deaths}>
-            deaths
-          </Typography>
-          <Typography variant="body2" component="span" className={classes.recovered}>
-            recovered
-          </Typography>
-        </div>
+      <Hidden mdUp implementation="css">
+        <Drawer
+          classes={{
+            paper: classes.drawerPaper
+          }}
+          onClose={handleToggleDrawer}
+          open={drawerOpen}
+          variant="temporary"
+        >
+          {header}
+          {globalItem}
+          {children}
+        </Drawer>
+      </Hidden>
+      <Hidden smDown implementation="css">
+        {header}
         <Drawer
           classes={{
             paper: classes.drawerPaper
@@ -100,28 +150,7 @@ export const SideNav: React.FC<SideNavProps> = ({
           variant="permanent"
           open
         >
-          {globalData &&
-            <Link to="/" className={classes.link}>
-              <MenuItem button>
-                <ListItemText
-                  primary="Global"
-                  secondary={
-                    <span className={classes.stats}>
-                      <Typography variant="body2" component="span" className={classes.confirmed}>
-                        {globalData.confirmed}
-                      </Typography>
-                      <Typography variant="body2" component="span" className={classes.deaths}>
-                        {globalData.deaths}
-                      </Typography>
-                      <Typography variant="body2" component="span" className={classes.recovered}>
-                        {globalData.recovered}
-                      </Typography>
-                    </span>
-                  }
-                />
-              </MenuItem>
-            </Link>
-          }
+          {globalItem}
           {children}
         </Drawer>
       </Hidden>

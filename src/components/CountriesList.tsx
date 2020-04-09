@@ -38,23 +38,15 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export const CountriesList: React.FC = props => {
-  const classes = useStyles()
-  const [countriesData, setCountriesData] = React.useState<any>(null)
-  const { t } = useTranslation('countries')
+type CountriesListProps = {
+  countriesData: any
+}
 
-  React.useEffect(
-    () => {
-      getAllLatest()
-        .then(data => {
-          data.sort((a: any, b: any) => {
-            return a[Object.keys(a)[0]].confirmed < b[Object.keys(b)[0]].confirmed ? 1 : -1
-          })
-          setCountriesData(data)
-        })
-    },
-    []
-  )
+export const CountriesList: React.FC<CountriesListProps> = ({
+  countriesData
+}) => {
+  const classes = useStyles()
+  const { t } = useTranslation('countries')
 
   return (
     <>
