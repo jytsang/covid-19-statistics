@@ -59,7 +59,7 @@ export default {
   "FJI": "Fiji",
   "FRA": "France",
   "GAB": "Gabon",
-  "GBR": "Great Britain",
+  "GBR": "United Kingdom",
   "GEO": "Georgia",
   "GHA": "Ghana",
   "GIN": "Guinea",

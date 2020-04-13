@@ -11,6 +11,7 @@ import { convertDateWise } from 'utils/convertGraphData'
 
 import { Latest } from 'components/Latest'
 import { HistoricLineGraph } from 'components/HistoricLineGraph'
+import { WorldMap } from 'components/WorldMap'
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -45,6 +46,9 @@ export const GlobalPage: React.FC = props => {
           </Grid>
           <Grid item xs={12} md={9}>
             <HistoricLineGraph data={globalData} />
+          </Grid>
+          <Grid item xs={12} md={9}>
+            <WorldMap />
           </Grid>
         </Grid>
       }
