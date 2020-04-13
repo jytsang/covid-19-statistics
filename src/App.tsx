@@ -38,8 +38,11 @@ const useStyles = makeStyles(theme => ({
     }
   },
   content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
+    flexGrow: 1
+  },
+  main: {
+    minHeight: 'calc(100vh - 70px)',
+    padding: theme.spacing(3)
   },
   header: {
     display: 'flex',
@@ -88,29 +91,31 @@ const App: React.FC = () => {
           >
             <CountriesList countriesData={countriesData} />
           </SideNav>
-          <main className={classes.content}>
-            <div>
-              <header className={classes.header}>
-                <Typography variant="h5" component="h1" className={classes.title}>COVID-19 Statistics</Typography>
-                <IconButton
-                  className={classes.menuButton}
-                  aria-label="open drawer"
-                  onClick={handleDrawerToggle}
-                >
-                  <MenuIcon />
-                </IconButton>
-              </header>
-              <Switch>
-                <Route path="/:countryCode">
-                  <CountryPage />
-                </Route>
-                <Route path="/">
-                  <GlobalPage />
-                </Route>
-              </Switch>
-            </div>
+          <div className={classes.content}>
+            <main className={classes.main}>
+              <div>
+                <header className={classes.header}>
+                  <Typography variant="h5" component="h1" className={classes.title}>COVID-19 Statistics</Typography>
+                  <IconButton
+                    className={classes.menuButton}
+                    aria-label="open drawer"
+                    onClick={handleDrawerToggle}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                </header>
+                <Switch>
+                  <Route path="/:countryCode">
+                    <CountryPage />
+                  </Route>
+                  <Route path="/">
+                    <GlobalPage />
+                  </Route>
+                </Switch>
+              </div>
+            </main>
             <Footer />
-          </main>
+          </div>
         </div>
       </ThemeProvider>
     </BrowserRouter>
