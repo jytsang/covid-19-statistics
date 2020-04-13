@@ -53,7 +53,10 @@ const useStyles = makeStyles(theme => ({
   },
   title: {},
   menuButton: {
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    }
   }
 }))
 
